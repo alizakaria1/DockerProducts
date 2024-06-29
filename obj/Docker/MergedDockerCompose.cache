@@ -1,0 +1,63 @@
+name: dockercompose4707454613059864622
+services:
+  mssql:
+    container_name: mssql
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: YourStrong@Passw0rd
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    networks:
+      product-network: null
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "6000"
+        protocol: tcp
+  products:
+    container_name: products-api
+    depends_on:
+      mssql:
+        condition: service_started
+        required: true
+      redis:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ConnectionStrings__DefaultConnection: Server=mssql;Database=DockerProduct;User ID=sa;Password=YourStrong@Passw0rd;
+      ConnectionStrings__Redis: redis-cache
+      IsRedisEnabled: "false"
+    image: products:v5
+    networks:
+      product-network: null
+    ports:
+      - mode: ingress
+        target: 8080
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\user\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\user\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+  redis:
+    container_name: redis-cache
+    image: redis:latest
+    networks:
+      product-network: null
+    ports:
+      - mode: ingress
+        target: 6379
+        published: "4000"
+        protocol: tcp
+networks:
+  product-network:
+    name: dockercompose4707454613059864622_product-network

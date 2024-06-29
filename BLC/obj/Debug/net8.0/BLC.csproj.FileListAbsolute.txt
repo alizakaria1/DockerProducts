@@ -1,0 +1,17 @@
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\bin\Debug\net8.0\BLC.deps.json
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\bin\Debug\net8.0\BLC.dll
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\bin\Debug\net8.0\BLC.pdb
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\bin\Debug\net8.0\DALC.dll
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\bin\Debug\net8.0\Shared.dll
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\bin\Debug\net8.0\DALC.pdb
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\bin\Debug\net8.0\Shared.pdb
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\obj\Debug\net8.0\BLC.csproj.AssemblyReference.cache
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\obj\Debug\net8.0\BLC.GeneratedMSBuildEditorConfig.editorconfig
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\obj\Debug\net8.0\BLC.AssemblyInfoInputs.cache
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\obj\Debug\net8.0\BLC.AssemblyInfo.cs
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\obj\Debug\net8.0\BLC.csproj.CoreCompileInputs.cache
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\obj\Debug\net8.0\BLC.csproj.Up2Date
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\obj\Debug\net8.0\BLC.dll
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\obj\Debug\net8.0\refint\BLC.dll
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\obj\Debug\net8.0\BLC.pdb
+C:\PracticeProjects\DockerProducts\Products.Sln\BLC\obj\Debug\net8.0\ref\BLC.dll

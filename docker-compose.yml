@@ -1,0 +1,60 @@
+version: '3.4'
+
+services:
+  products:
+    image: products:v8
+    deploy:
+      replicas: 1
+    depends_on:
+      - mssql
+      - redis
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=mssql;Database=DockerProduct;User ID=sa;Password=YourStrong@Pass;encrypt=False;
+      - ConnectionStrings__Redis=redis-cache
+      - IsRedisEnabled=true
+      - FileUrl=http://localhost:3000/api/
+      - FilePath=/app/uploads/
+    networks:
+      - product-network
+    volumes:
+      - uploads:/app/uploads
+
+  mssql:
+    image: alizakaria/productsdb:v5
+    container_name: mssql
+    environment:
+      SA_PASSWORD: "YourStrong@Pass"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "4000:1433"
+    networks:
+      - product-network
+    volumes:
+      - mssql-data:/var/opt/mssql
+
+  redis:
+    image: redis:latest
+    container_name: redis-cache
+    ports:
+      - "4040:6379"
+    networks:
+      - product-network
+    volumes:
+      - redis-data:/data
+  nginx:
+    image: nginxproduct:v2
+    container_name: nginx
+    ports:
+      - "3000:80"
+    depends_on:
+      - products
+    networks:
+      - product-network
+networks:
+  product-network:
+
+volumes:
+  mssql-data:
+  redis-data:
+  nginx-data:
+  uploads:  

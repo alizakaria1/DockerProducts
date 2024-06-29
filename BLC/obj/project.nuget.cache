@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KH9AijaKWBfyqotQIt4BogM1HEwMpWdjSWs6m/64n0ot3/AcjMQ/Q0jJ+x17U9RFvphb59BsyXZS/qPcpqIoRQ==",
+  "dgSpecHash": "JZnmaf9USinrLkIiQyFHbOcU4ROYdDa8H1Bglmg0HD0prR4EFtLKcy+2Rg0Pf2aJ3E6r7125lVmtmaW5f9IDOw==",
   "success": true,
-  "projectFilePath": "C:\\PracticeProjects\\DockerProducts\\Products.Sln\\BLC\\BLC.csproj",
+  "projectFilePath": "C:\\PracticeProjects\\DockerProducts\\DockerProducts\\BLC\\BLC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

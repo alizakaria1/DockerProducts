@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "o3zvU8iVU1IfKulGr+hdMaqiE1bj7cTBVVSzVYa5oAQwah1bFljLl4O3EJpR2YRZ65D0mJVAKuERw9egLjbK2w==",
+  "dgSpecHash": "DOiaFXFgHsBbKlHazIQvdjPWZDAfgUf00HT0kb8v5DX9M6NtxFeEuvq4Ik9ijuUxX5FSOnTm8gQFw+cTjDHo2A==",
   "success": true,
-  "projectFilePath": "C:\\PracticeProjects\\DockerProducts\\Products.Sln\\API\\API.csproj",
+  "projectFilePath": "C:\\PracticeProjects\\DockerProducts\\DockerProducts\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

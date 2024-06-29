@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\PracticeProjects\\DockerProducts\\Products.Sln\\Shared\\Shared.csproj",
+      "projectUniqueName": "C:\\PracticeProjects\\DockerProducts\\DockerProducts\\Shared\\Shared.csproj",
       "projectName": "Shared",
-      "projectPath": "C:\\PracticeProjects\\DockerProducts\\Products.Sln\\Shared\\Shared.csproj",
+      "projectPath": "C:\\PracticeProjects\\DockerProducts\\DockerProducts\\Shared\\Shared.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\PracticeProjects\\DockerProducts\\Products.Sln\\Shared\\obj\\",
+      "outputPath": "C:\\PracticeProjects\\DockerProducts\\DockerProducts\\Shared\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

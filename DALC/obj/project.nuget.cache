@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VVIXWO0GFSX2nXxPba7NI8mjFo7e+JG0T0pyywaDan4bMkOciDAAQwFYTmret5UCAOd501+wQWELaLOaRRvc9A==",
+  "dgSpecHash": "CJ50zPifWRkoEEpRcMm4DBJzVdKOXBS9Am7bJeRAUsNLpCtVwrwt4YXwNlId3mrY6XuvNrTJ6Z3EqDxSGy3Ecg==",
   "success": true,
-  "projectFilePath": "C:\\PracticeProjects\\DockerProducts\\Products.Sln\\DALC\\DALC.csproj",
+  "projectFilePath": "C:\\PracticeProjects\\DockerProducts\\DockerProducts\\DALC\\DALC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

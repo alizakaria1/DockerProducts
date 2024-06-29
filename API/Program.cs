@@ -42,7 +42,7 @@ app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
                    Path.Combine(filePath)),
-    RequestPath = "/api"
+    RequestPath = "/uploads"
 });
 
 app.UseAuthorization();

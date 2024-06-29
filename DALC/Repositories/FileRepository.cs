@@ -14,7 +14,7 @@ namespace DALC.Repositories
             _context = context;
         }
 
-        public async Task<bool> DeleteFile(int fileId)
+        public async Task<UploadedFiles> DeleteFile(int fileId)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace DALC.Repositories
 
                 await _context.SaveChangesAsync();
 
-                return true;
+                return result.Entity;
             }
             catch (Exception)
             {

@@ -26,7 +26,6 @@ builder.Services.AddScoped<ProductManager>();
 builder.Services.AddScoped<FileManager>();
 
 var filePath = builder.Configuration.GetValue<string>("FilePath");
-Console.WriteLine($"this is the filePath : {filePath}");
 
 var app = builder.Build();
 

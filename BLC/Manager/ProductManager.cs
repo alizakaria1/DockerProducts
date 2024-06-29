@@ -11,20 +11,12 @@ namespace BLC.Manager
         private IProductRepository _repository;
         private ICacheRepository _cacheRepository;
         private IFileRepository _fileRepository;
-        private string fileUrl;
 
         public ProductManager(IProductRepository repository, ICacheRepository cacheRepository, IFileRepository fileRepository)
         {
             _repository = repository;
             _cacheRepository = cacheRepository;
             _fileRepository = fileRepository;
-
-            IConfiguration configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .AddEnvironmentVariables()
-            .Build();
-
-            fileUrl = configuration.GetValue<string>("FileUrl");
         }
 
         public async Task<Product> AddProductAsync(Product product)
@@ -90,9 +82,9 @@ namespace BLC.Manager
 
                 products.SelectMany(p => p.UploadedFiles)
                .ToList()
-               .ForEach(file => file.Url = $"{fileUrl}{file.FileId}.{file.Extension}");
+               .ForEach(file => file.Url = $"{ConfigVariables.fileUrl}{file.FileId}.{file.Extension}");
 
-                Console.WriteLine($"this is the fileUrl : {fileUrl}");
+                Console.WriteLine($"this is the fileUrl : {ConfigVariables.fileUrl}");
                 return products;
             }
             catch (Exception)
@@ -110,9 +102,9 @@ namespace BLC.Manager
 
                 foreach (var file in product.UploadedFiles)
                 {
-                    file.Url = $"{fileUrl}{file.FileId}.{file.Extension}";
+                    file.Url = $"{ConfigVariables.fileUrl}{file.FileId}.{file.Extension}";
                 }
-                Console.WriteLine($"this is the fileUrl : {fileUrl}");
+                Console.WriteLine($"this is the fileUrl : {ConfigVariables.fileUrl}");
                 return product;
             }
             catch (Exception)

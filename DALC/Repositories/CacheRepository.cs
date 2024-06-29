@@ -1,6 +1,7 @@
 ﻿using DALC.IRepositories;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Shared.Constants;
 using Shared.Models;
 using StackExchange.Redis;
 using System.Reflection;
@@ -12,24 +13,12 @@ namespace DALC.Repositories
     {
         private readonly ConnectionMultiplexer _redis;
         private readonly IDatabase _database;
-        private bool isRedisEnabled;
+        //private bool isRedisEnabled;
 
         public CacheRepository()
         {
-            IConfiguration configuration = new ConfigurationBuilder()
-             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-             .AddEnvironmentVariables()
-             .Build();
-
-            var redisConnectionString = configuration.GetConnectionString("Redis");
-
-            Console.WriteLine($"your redis connection string is the following {redisConnectionString}");
-
-            _redis = ConnectionMultiplexer.Connect(redisConnectionString);
+            _redis = ConnectionMultiplexer.Connect(ConfigVariables.redisConnectionString);
             _database = _redis.GetDatabase();
-
-            isRedisEnabled = configuration.GetValue<bool>("IsRedisEnabled");
-
         }
 
         public async Task<T> GetOrAddCachedObjectAsync<T>(string key, Func<Task<T>> getItem)
@@ -37,7 +26,7 @@ namespace DALC.Repositories
 
             try
             {
-                if (!isRedisEnabled)
+                if (!ConfigVariables.isRedisEnabled)
                 {
                     return await getItem();
                 }
@@ -81,7 +70,7 @@ namespace DALC.Repositories
         public async Task<T> GetOrAddCachedObjectAsync<T>(string key, string allRecordsKey, Func<Task<T>> getItem)
         {
 
-            if (!isRedisEnabled)
+            if (!ConfigVariables.isRedisEnabled)
             {
                 return await getItem();
             }
@@ -156,7 +145,7 @@ namespace DALC.Repositories
         public async Task<bool> DeleteItemAndSyncRedisAsync<T>(string itemKey, string allRecordsKey, string itemId)
         {
 
-            if (!isRedisEnabled)
+            if (!ConfigVariables.isRedisEnabled)
             {
                 return false;
             }
@@ -210,7 +199,7 @@ namespace DALC.Repositories
         public async Task<bool> UpdateItemAndSyncRedisAsync<T>(string itemKey, T updatedItem, string allRecordsKey, string itemId)
         {
 
-            if (!isRedisEnabled)
+            if (!ConfigVariables.isRedisEnabled)
             {
                 return false;
             }
@@ -257,7 +246,7 @@ namespace DALC.Repositories
         public async Task<bool> InsertItemAndSyncRedisAsync<T>(T newItem, string itemKey, string allRecordsKey)
         {
 
-            if (!isRedisEnabled)
+            if (!ConfigVariables.isRedisEnabled)
             {
                 return false;
             }

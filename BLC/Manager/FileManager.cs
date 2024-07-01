@@ -53,20 +53,23 @@ namespace BLC.Manager
 
         public async Task DeleteFile(int fileId)
         {
-            try
+            using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
-                var deletedFile = await _fileRepository.DeleteFile(fileId);
-                
-                await _cacheRepository.DeleteItemAndSyncRedisAsync<UploadedFiles>($"{CacheConstants.File}:{fileId}", CacheConstants.AllFiles, fileId.ToString());
-                
-                var file = string.Format("{0}{1}.{2}", ConfigVariables.filePath, deletedFile.FileId, deletedFile.Extension);
-                
-                File.Delete(file);
-            }
-            catch (Exception)
-            {
+                try
+                {
+                    var deletedFile = await _fileRepository.DeleteFile(fileId);
 
-                throw;
+                    await _cacheRepository.DeleteItemAndSyncRedisAsync<UploadedFiles>($"{CacheConstants.File}:{fileId}", CacheConstants.AllFiles, fileId.ToString());
+
+                    var file = string.Format("{0}{1}.{2}", ConfigVariables.filePath, deletedFile.FileId, deletedFile.Extension);
+
+                    File.Delete(file);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                } 
             }
         }
     }

@@ -14,5 +14,7 @@ namespace DALC.IRepositories
 
         public Task<bool> UpdateItemAndSyncRedisAsync<T>(string itemKey, T updatedItem, string allRecordsKey, string itemId);
 
+        public Task<bool> DeleteUploadedFile<T>(string fileId, string itemKey, string allRecordsKey, string itemId);
+
     }
 }

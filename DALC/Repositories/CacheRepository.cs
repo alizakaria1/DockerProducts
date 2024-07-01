@@ -1,9 +1,11 @@
 ﻿using DALC.IRepositories;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Shared.Constants;
 using Shared.Models;
 using StackExchange.Redis;
+using System.Collections;
 using System.Reflection;
 using System.Text.Json;
 
@@ -53,7 +55,7 @@ namespace DALC.Repositories
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     };
 
-                    string jsonString = JsonConvert.SerializeObject(item,settings);
+                    string jsonString = JsonConvert.SerializeObject(item, settings);
 
                     var res = await _database.StringSetAsync(key, jsonString);
 
@@ -193,6 +195,87 @@ namespace DALC.Repositories
             bool transactionSuccess = await transaction.ExecuteAsync();
 
             // If the transaction was successful, return true
+            return transactionSuccess;
+        }
+
+        public async Task<bool> DeleteUploadedFile<T>(string fileId, string itemKey, string allRecordsKey, string itemId)
+        {
+            if (!ConfigVariables.isRedisEnabled)
+            {
+                return false;
+            }
+
+            // Create a Redis transaction
+            var transaction = _database.CreateTransaction();
+
+            var res = await _database.StringGetAsync(itemKey);
+
+            T jsonObject = JsonConvert.DeserializeObject<T>(res);
+
+            var uploadedFilesProperty = typeof(T).GetProperty("UploadedFiles");
+
+            if (uploadedFilesProperty == null)
+            {
+                return false;
+            }
+
+            var uploadedFiles = uploadedFilesProperty.GetValue(jsonObject) as List<UploadedFiles>;
+
+            if(uploadedFiles == null || !uploadedFiles.Any())
+            {
+                return false;
+            }
+
+            var fileToRemove = uploadedFiles.FirstOrDefault(file => file.FileId == int.Parse(fileId));
+
+            uploadedFiles.Remove(fileToRemove);
+
+            var updatedRecordsJson = JsonConvert.SerializeObject(jsonObject);
+
+            // Step 5: Update the list in Redis
+            var updateListTask = transaction.StringSetAsync(itemKey, updatedRecordsJson);
+
+            var allRecords = await _database.StringGetAsync(allRecordsKey);
+
+            if(!allRecords.HasValue)
+            {
+                return false;
+            }
+
+            var allRecordsJson = JsonConvert.DeserializeObject<List<T>>(allRecords);
+            
+            var item = allRecordsJson.FirstOrDefault(item =>
+            {
+                var idProperty = item.GetType().GetProperty("Id");
+                var idValue = idProperty?.GetValue(item)?.ToString();
+                return idValue == itemId;
+            });
+
+            var itemFiles = typeof(T).GetProperty("UploadedFiles");
+
+            if (itemFiles == null)
+            {
+                return false;
+            }
+
+            var itemUploadedFiles = uploadedFilesProperty.GetValue(item) as List<UploadedFiles>;
+
+            if (itemUploadedFiles == null || !itemUploadedFiles.Any())
+            {
+                return false;
+            }
+
+            var itemFileToRemove = itemUploadedFiles.FirstOrDefault(file => file.FileId == int.Parse(fileId));
+
+            itemUploadedFiles.Remove(itemFileToRemove);
+
+            var updatedAllRecordsJson = JsonConvert.SerializeObject(allRecordsJson);
+
+            // Step 5: Update the list in Redis
+            var updatedList = transaction.StringSetAsync(allRecordsKey, updatedAllRecordsJson);
+
+            bool transactionSuccess = await transaction.ExecuteAsync();
+
             return transactionSuccess;
         }
 

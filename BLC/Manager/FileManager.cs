@@ -61,6 +61,8 @@ namespace BLC.Manager
 
                     await _cacheRepository.DeleteItemAndSyncRedisAsync<UploadedFiles>($"{CacheConstants.File}:{fileId}", CacheConstants.AllFiles, fileId.ToString());
 
+                    await _cacheRepository.DeleteUploadedFile<Product>(fileId.ToString(), $"{CacheConstants.Product}:{deletedFile.ProductId}", CacheConstants.AllProducts,deletedFile.ProductId.ToString());
+
                     var file = string.Format("{0}{1}.{2}", ConfigVariables.filePath, deletedFile.FileId, deletedFile.Extension);
 
                     File.Delete(file);

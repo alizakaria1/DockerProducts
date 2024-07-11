@@ -26,11 +26,12 @@ builder.Services.AddScoped<ProductManager>();
 builder.Services.AddScoped<FileManager>();
 
 var filePath = builder.Configuration.GetValue<string>("FilePath");
+var frontendUrl = builder.Configuration.GetValue<string>("FrontEndUrl");
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", builder => builder
-        .WithOrigins("http://localhost:3000")
+        .WithOrigins(frontendUrl)
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials());

@@ -52,7 +52,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t alizakaria/productsapi:${{ env.VERSION }} .
+          docker build -t alizakaria/products:${{ env.VERSION }} -f Dockerfile .
 
       - name: Push Docker image
         run: |

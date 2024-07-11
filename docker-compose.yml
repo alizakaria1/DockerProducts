@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   products:
-    image: products:v11
+    image: alizakaria/products:v1
     deploy:
       replicas: 4
     depends_on:

@@ -1,5 +1,5 @@
 this is an application which can be completely run on docker. It includes MSSQL, redis for caching, nginx as a load balancer and reactjs for the frontend.
-In this application you can upload a product with image, view it and delete it.
+In this application you can upload a product with image, view it and delete it. All you need to do is run the docker compose file you can find in the repository.
 Most of the images used are custom and uploaded on docker hub.
 
 alizakaria/products:v2 : this is the image for the backend api.

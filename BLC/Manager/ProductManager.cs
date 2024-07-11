@@ -84,7 +84,6 @@ namespace BLC.Manager
                .ToList()
                .ForEach(file => file.Url = $"{ConfigVariables.fileUrl}{file.FileId}.{file.Extension}");
 
-                Console.WriteLine($"this is the fileUrl : {ConfigVariables.fileUrl}");
                 return products;
             }
             catch (Exception)

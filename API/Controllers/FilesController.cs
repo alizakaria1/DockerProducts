@@ -43,8 +43,6 @@ namespace API.Controllers
 
                 var filePath = string.Format(@"{0}{1}.{2}", path, fileToUpload.FileId, fileExtension);
 
-                Console.WriteLine($"this is the full file path when uploading: {filePath}");
-
                 using (var stream = System.IO.File.Create(filePath))
                 {
                     await file.CopyToAsync(stream);

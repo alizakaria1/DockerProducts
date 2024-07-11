@@ -44,3 +44,5 @@ $RECYCLE.BIN/
 .vs/
 **/bin/
 **/obj/
+*.jpg
+*.png

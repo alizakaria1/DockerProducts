@@ -2,9 +2,9 @@ version: '3.4'
 
 services:
   products:
-    image: products:v10
+    image: products:v11
     deploy:
-      replicas: 1
+      replicas: 4
     depends_on:
       - mssql
       - redis

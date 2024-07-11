@@ -12,6 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: List directory contents for debugging
+        run: ls -R
+
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
